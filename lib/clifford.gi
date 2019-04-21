@@ -68,11 +68,11 @@ end;
 
 #############################################################################
 ##
-##  IsSymplecticMatrix( M )
+##  IsBinarySymplecticMatrix( M )
 ##
 ##  Verifies whether M Omega M^T = Omega mod 2.
 ##
-InstallGlobalFunction( IsSymplecticMatrix, function( M )
+InstallGlobalFunction( IsBinarySymplecticMatrix, function( M )
   local dim, n, omega, MT, M_omega, lhs, i, j;
   dim := Length( M );
   if dim mod 2 <> 0 or Length( M[1] ) <> dim then
@@ -221,7 +221,7 @@ InstallGlobalFunction( SynthesizeCliffordCircuit, function( symplectic_mat )
   dim := Length( symplectic_mat );
   n := QuoInt( dim, 2 );
 
-  if not IsSymplecticMatrix( symplectic_mat ) then
+  if not IsBinarySymplecticMatrix( symplectic_mat ) then
     Error( "SynthesizeCliffordCircuit: input matrix is not symplectic" );
   fi;
 

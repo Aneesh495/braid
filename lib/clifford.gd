@@ -10,7 +10,7 @@
 DeclareCategory( "IsSymplecticMatrix", IsComponentObjectRep );
 
 DeclareGlobalFunction( "SymplecticFormOmega" );
-DeclareGlobalFunction( "IsSymplecticMatrix" );
+DeclareGlobalFunction( "IsBinarySymplecticMatrix" );
 DeclareGlobalFunction( "TableauToSymplecticMatrix" );
 DeclareGlobalFunction( "MultiplySymplecticMatrices" );
 DeclareGlobalFunction( "SymplecticInverse" );
