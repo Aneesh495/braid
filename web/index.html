@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>braid: Fault-Tolerant Quantum Workbench</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <span class="logo-accent">braid</span> // Fault-Tolerant Quantum &amp; Stabilizer Engine
+    </div>
+    <div class="header-badges">
+      <span class="badge">GAP Core</span>
+      <span class="badge">Gottesman-Knill</span>
+      <span class="badge">Topological Surface Codes</span>
+      <span class="badge">QLDPC</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="card">
+      <div class="card-header">
+        <h2>2D Topological Rotated Surface Code Lattice</h2>
+        <div class="controls">
+          <label for="distance-select">Distance (d):</label>
+          <select id="distance-select">
+            <option value="3" selected>d = 3 (9 Qubits)</option>
+            <option value="5">d = 5 (25 Qubits)</option>
+            <option value="7">d = 7 (49 Qubits)</option>
+          </select>
+          <button id="btn-reset-lattice" class="btn">Reset Lattice</button>
+          <button id="btn-decode-mwpm" class="btn btn-primary">Run MWPM Decoder</button>
+        </div>
+      </div>
+      <div class="lattice-container">
+        <canvas id="lattice-canvas" width="600" height="420"></canvas>
+        <div class="lattice-sidebar">
+          <h3>Syndrome Defect Inspector</h3>
+          <p class="hint">Click a qubit node to toggle Pauli errors (X / Z / Y). Watch syndrome defect faces illuminate.</p>
+          <div class="syndrome-stats">
+            <div><strong>Physical Qubits:</strong> <span id="stat-qubits">9</span></div>
+            <div><strong>Active X-Defects:</strong> <span id="stat-x-defects">0</span></div>
+            <div><strong>Active Z-Defects:</strong> <span id="stat-z-defects">0</span></div>
+            <div><strong>Correction Status:</strong> <span id="stat-correction" class="status-ok">In Code Space</span></div>
+          </div>
+          <div class="legend">
+            <div><span class="legend-color x-star"></span> X-Stabilizer (Star)</div>
+            <div><span class="legend-color z-plaq"></span> Z-Stabilizer (Plaquette)</div>
+            <div><span class="legend-color qubit-err"></span> Corrupted Physical Qubit</div>
+            <div><span class="legend-color log-path"></span> Logical Operator Path</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="two-col">
+      <section class="card">
+        <div class="card-header">
+          <h2>Gottesman-Knill Stabilizer Tableau</h2>
+          <div class="controls">
+            <button id="gate-h" class="btn btn-sm">H[0]</button>
+            <button id="gate-s" class="btn btn-sm">S[0]</button>
+            <button id="gate-cnot" class="btn btn-sm">CX[0, 1]</button>
+            <button id="gate-reset" class="btn btn-sm">Reset</button>
+          </div>
+        </div>
+        <div class="tableau-view">
+          <div id="tableau-matrix" class="matrix-grid"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <h2>Fault-Tolerance Threshold Scaling (pL vs p)</h2>
+        </div>
+        <div class="chart-container">
+          <svg id="threshold-svg" viewBox="0 0 500 300"></svg>
+        </div>
+      </section>
+    </div>
+
+    <section class="card">
+      <div class="card-header">
+        <h2>OpenQASM Circuit Editor and Inspector</h2>
+        <div class="controls">
+          <select id="qasm-preset">
+            <option value="bell">Bell State Preparation</option>
+            <option value="ghz">3-Qubit GHZ State</option>
+            <option value="steane">Steane [[7, 1, 3]] Logical |0></option>
+          </select>
+          <button id="btn-run-qasm" class="btn btn-primary">Compile &amp; Execute</button>
+        </div>
+      </div>
+      <div class="editor-grid">
+        <textarea id="qasm-editor" spellcheck="false"></textarea>
+        <div class="circuit-output">
+          <h3>Stabilizer Output Generators:</h3>
+          <pre id="qasm-output">// Run compilation to view stabilizer state...</pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>braid: Fault-Tolerant Quantum Compilation, Stabilizer Synthesis, and Topological Error Correction Engine in GAP.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
