@@ -19,3 +19,4 @@ ReadPackage( "braid", "lib/decoder.gi" );
 ReadPackage( "braid", "lib/qasm.gi" );
 ReadPackage( "braid", "lib/distill.gi" );
 ReadPackage( "braid", "lib/threshold.gi" );
+ReadPackage( "braid", "lib/normalizer.gi" );

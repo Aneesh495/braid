@@ -24,6 +24,7 @@ test_files := [
   "tst/test_qasm.tst",
   "tst/test_distill.tst",
   "tst/test_threshold.tst",
+  "tst/test_normalizer.tst",
   "tst/test_regression.tst"
 ];
 
