@@ -21,3 +21,4 @@ ReadPackage( "braid", "lib/distill.gd" );
 ReadPackage( "braid", "lib/threshold.gd" );
 ReadPackage( "braid", "lib/normalizer.gd" );
 ReadPackage( "braid", "lib/graphstate.gd" );
+ReadPackage( "braid", "lib/surgery.gd" );

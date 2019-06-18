@@ -26,6 +26,7 @@ test_files := [
   "tst/test_threshold.tst",
   "tst/test_normalizer.tst",
   "tst/test_graphstate.tst",
+  "tst/test_surgery.tst",
   "tst/test_regression.tst"
 ];
 

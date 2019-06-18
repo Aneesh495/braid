@@ -5,7 +5,7 @@ true
 gap> omega2 := SymplecticFormOmega( 2 );;
 gap> IsBinarySymplecticMatrix( omega2 );
 true
-gap> id4 := List( [1..4], i -> List( [1..4], j -> (if i = j then 1 else 0 fi) ) );;
+gap> id4 := [ [ 1, 0, 0, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 1, 0 ], [ 0, 0, 0, 1 ] ];;
 gap> IsBinarySymplecticMatrix( id4 );
 true
 gap> tab := StabilizerTableau( 2 );;
