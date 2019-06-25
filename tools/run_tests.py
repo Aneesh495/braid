@@ -10,7 +10,7 @@ def run_gap_tests():
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     cmd = ["gap", "-b", "-q", "tst/testall.g"]
     print(f"Executing: {' '.join(cmd)} in {repo_root}")
-    res = subprocess.run(cmd, cwd=repo_root, capture_output=True, text=True)
+    res = subprocess.run(cmd, cwd=repo_root, capture_output=True, text=True, stdin=subprocess.DEVNULL)
     sys.stdout.write(res.stdout)
     if res.returncode != 0:
         sys.stderr.write(res.stderr)

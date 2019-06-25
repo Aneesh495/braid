@@ -56,6 +56,8 @@ InstallGlobalFunction( CSSCode, function( H_X, H_Z )
 
   all_gens := Concatenation( x_gens, z_gens );
   code := StabilizerCode( n, all_gens );
+  code!.hx := StructuralCopy( H_X );
+  code!.hz := StructuralCopy( H_Z );
   return code;
 end );
 
