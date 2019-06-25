@@ -28,6 +28,7 @@ test_files := [
   "tst/test_graphstate.tst",
   "tst/test_surgery.tst",
   "tst/test_color.tst",
+  "tst/test_toric.tst",
   "tst/test_regression.tst"
 ];
 
