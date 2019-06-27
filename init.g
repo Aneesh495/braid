@@ -24,3 +24,4 @@ ReadPackage( "braid", "lib/graphstate.gd" );
 ReadPackage( "braid", "lib/surgery.gd" );
 ReadPackage( "braid", "lib/color.gd" );
 ReadPackage( "braid", "lib/toric.gd" );
+ReadPackage( "braid", "lib/opt.gd" );
