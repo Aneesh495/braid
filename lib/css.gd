@@ -15,3 +15,5 @@ DeclareGlobalFunction( "CSSCodeFromClassical" );
 DeclareGlobalFunction( "IsCSSCode" );
 DeclareGlobalFunction( "CSSXStabilizers" );
 DeclareGlobalFunction( "CSSZStabilizers" );
+DeclareGlobalFunction( "CSSXMatrix" );
+DeclareGlobalFunction( "CSSZMatrix" );

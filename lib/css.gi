@@ -152,3 +152,25 @@ end );
 InstallGlobalFunction( CSSZStabilizers, function( code )
   return Filtered( code!.generators, g -> Sum( g!.z ) > 0 and Sum( g!.x ) = 0 );
 end );
+
+#############################################################################
+##
+##  CSSXMatrix( code )
+##
+InstallGlobalFunction( CSSXMatrix, function( code )
+  if IsBound( code!.hx ) then
+    return code!.hx;
+  fi;
+  return List( CSSXStabilizers( code ), g -> g!.x );
+end );
+
+#############################################################################
+##
+##  CSSZMatrix( code )
+##
+InstallGlobalFunction( CSSZMatrix, function( code )
+  if IsBound( code!.hz ) then
+    return code!.hz;
+  fi;
+  return List( CSSZStabilizers( code ), g -> g!.z );
+end );

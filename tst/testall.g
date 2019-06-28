@@ -30,6 +30,7 @@ test_files := [
   "tst/test_color.tst",
   "tst/test_toric.tst",
   "tst/test_opt.tst",
+  "tst/test_reedmuller.tst",
   "tst/test_regression.tst"
 ];
 

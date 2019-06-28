@@ -25,3 +25,4 @@ ReadPackage( "braid", "lib/surgery.gd" );
 ReadPackage( "braid", "lib/color.gd" );
 ReadPackage( "braid", "lib/toric.gd" );
 ReadPackage( "braid", "lib/opt.gd" );
+ReadPackage( "braid", "lib/reedmuller.gd" );

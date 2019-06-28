@@ -25,3 +25,4 @@ ReadPackage( "braid", "lib/surgery.gi" );
 ReadPackage( "braid", "lib/color.gi" );
 ReadPackage( "braid", "lib/toric.gi" );
 ReadPackage( "braid", "lib/opt.gi" );
+ReadPackage( "braid", "lib/reedmuller.gi" );
