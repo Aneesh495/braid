@@ -27,3 +27,4 @@ ReadPackage( "braid", "lib/toric.gi" );
 ReadPackage( "braid", "lib/opt.gi" );
 ReadPackage( "braid", "lib/reedmuller.gi" );
 ReadPackage( "braid", "lib/pauliframe.gi" );
+ReadPackage( "braid", "lib/statevec.gi" );

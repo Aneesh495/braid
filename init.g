@@ -27,3 +27,4 @@ ReadPackage( "braid", "lib/toric.gd" );
 ReadPackage( "braid", "lib/opt.gd" );
 ReadPackage( "braid", "lib/reedmuller.gd" );
 ReadPackage( "braid", "lib/pauliframe.gd" );
+ReadPackage( "braid", "lib/statevec.gd" );
