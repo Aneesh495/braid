@@ -17,4 +17,12 @@ gap> d_zero.error_reduction_factor;
 gap> d_pos := MagicStateDistillation15to1( 0.01 );;
 gap> d_pos.error_reduction_factor > 100.0;
 true
+gap> # Regression test for bug 4: GottesmanPhaseHelper phase computation on Y and Z
+gap> tab_reg := StabilizerTableau( 2 );;
+gap> ApplyHadamard( tab_reg, 1 );;
+gap> ApplyPhase( tab_reg, 1 );;
+gap> ApplyCNOT( tab_reg, 1, 2 );;
+gap> m_res := MeasurePauliZ( tab_reg, 1 );;
+gap> m_res in [0, 1];
+true
 gap> STOP_TEST( "test_regression.tst", 10000 );

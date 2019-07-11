@@ -24,12 +24,12 @@ TableauType := NewType( TableauFamily, IsStabilizerTableau );
 GottesmanPhaseHelper := function( x1, z1, x2, z2 )
   if x1 = 0 and z1 = 0 then
     return 0;
-  elif x1 = 1 and z1 = 0 then
-    return z2 - x2;
   elif x1 = 1 and z1 = 1 then
-    return x2 * (1 - 2 * z2);
+    return z2 - x2;
+  elif x1 = 1 and z1 = 0 then
+    return z2 * (2 * x2 - 1);
   elif x1 = 0 and z1 = 1 then
-    return x2 - z2;
+    return x2 * (1 - 2 * z2);
   fi;
   return 0;
 end;
@@ -325,7 +325,7 @@ InstallGlobalFunction( MeasurePauliZ, function( tab, qubit )
     # Non-deterministic outcome
     # For every other row i <> p with x_{i, qubit} = 1, call RowSum(tab, i, p)
     for i in [1 .. 2 * n] do
-      if i <> p and tab!.matrix[i][qubit] = 1 then
+      if i <> p and i <> (p - n) and tab!.matrix[i][qubit] = 1 then
         RowSum( tab, i, p );
       fi;
     od;
