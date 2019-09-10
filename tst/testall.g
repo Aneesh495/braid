@@ -33,6 +33,7 @@ test_files := [
   "tst/test_reedmuller.tst",
   "tst/test_pauliframe.tst",
   "tst/test_statevec.tst",
+  "tst/test_edge_cases.tst",
   "tst/test_regression.tst"
 ];
 
