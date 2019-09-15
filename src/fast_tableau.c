@@ -160,7 +160,31 @@ int fast_tableau_measure_z(FastTableau *tab, size_t qubit, uint64_t *rng_state) 
     }
 
     if (p > 0) {
-        /* Non-deterministic measurement */
+        /* Non-deterministic measurement: eliminate x on this qubit for all other rows */
+        for (size_t r = 0; r < 2 * tab->num_qubits; ++r) {
+            if (r != p && (tab->x_matrix[ROW_INDEX(r, word, tab->num_words)] & bit)) {
+                for (size_t w = 0; w < tab->num_words; ++w) {
+                    tab->x_matrix[ROW_INDEX(r, w, tab->num_words)] ^= tab->x_matrix[ROW_INDEX(p, w, tab->num_words)];
+                    tab->z_matrix[ROW_INDEX(r, w, tab->num_words)] ^= tab->z_matrix[ROW_INDEX(p, w, tab->num_words)];
+                }
+            }
+        }
+
+        /* Copy row p into its corresponding destabilizer row p - num_qubits */
+        size_t destab_row = p - tab->num_qubits;
+        for (size_t w = 0; w < tab->num_words; ++w) {
+            tab->x_matrix[ROW_INDEX(destab_row, w, tab->num_words)] = tab->x_matrix[ROW_INDEX(p, w, tab->num_words)];
+            tab->z_matrix[ROW_INDEX(destab_row, w, tab->num_words)] = tab->z_matrix[ROW_INDEX(p, w, tab->num_words)];
+        }
+        tab->phases[destab_row] = tab->phases[p];
+
+        /* Reset row p to pure Z on qubit */
+        for (size_t w = 0; w < tab->num_words; ++w) {
+            tab->x_matrix[ROW_INDEX(p, w, tab->num_words)] = 0;
+            tab->z_matrix[ROW_INDEX(p, w, tab->num_words)] = 0;
+        }
+        tab->z_matrix[ROW_INDEX(p, word, tab->num_words)] |= bit;
+
         int outcome = 0;
         if (rng_state) {
             *rng_state ^= *rng_state << 13;
@@ -171,7 +195,15 @@ int fast_tableau_measure_z(FastTableau *tab, size_t qubit, uint64_t *rng_state) 
 
         tab->phases[p] = (uint8_t)outcome;
         return outcome;
+    } else {
+        /* Deterministic measurement */
+        int outcome = 0;
+        for (size_t i = 0; i < tab->num_qubits; ++i) {
+            if (tab->x_matrix[ROW_INDEX(i, word, tab->num_words)] & bit) {
+                size_t stab_row = tab->num_qubits + i;
+                outcome ^= (int)tab->phases[stab_row];
+            }
+        }
+        return outcome;
     }
-
-    return 0;
 }
