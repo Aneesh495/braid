@@ -151,6 +151,25 @@ def cmd_distill(args, repo_root):
             print(f"    {line}")
     return 0
 
+def cmd_export(args, repo_root):
+    code_name = args.code.lower()
+    print(f"[*] Exporting code profile for '{code_name}' to {args.output}")
+    if code_name == "steane":
+        data = {"code": "steane", "nqubits": 7, "k": 1, "d": 3}
+    elif code_name == "surface":
+        d = int(args.distance)
+        data = {"code": "surface", "distance": d, "nqubits": d * d, "k": 1, "d": d}
+    elif code_name == "toric":
+        l = int(args.distance)
+        data = {"code": "toric", "linear_size": l, "nqubits": 2 * l * l, "k": 2, "d": l}
+    else:
+        data = {"code": code_name, "nqubits": 15, "k": 1, "d": 3}
+
+    with open(args.output, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+    print(f"[+] Exported to {args.output}")
+    return 0
+
 def main():
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     parser = argparse.ArgumentParser(
@@ -183,6 +202,12 @@ def main():
     p_dist = subparsers.add_parser("distill", help="Magic state factory distillation simulation")
     p_dist.add_argument("-e", "--input-error", default=0.01, type=float, help="Raw input error rate")
 
+    # export
+    p_exp = subparsers.add_parser("export", help="Export quantum code specification to JSON")
+    p_exp.add_argument("--code", default="steane", help="Code family: steane, surface, toric, reedmuller")
+    p_exp.add_argument("-d", "--distance", default=3, type=int, help="Code distance")
+    p_exp.add_argument("-o", "--output", required=True, help="Output JSON path")
+
     args = parser.parse_args()
 
     if args.command == "compile":
@@ -195,6 +220,8 @@ def main():
         sys.exit(cmd_threshold(args, repo_root))
     elif args.command == "distill":
         sys.exit(cmd_distill(args, repo_root))
+    elif args.command == "export":
+        sys.exit(cmd_export(args, repo_root))
 
 if __name__ == "__main__":
     main()
