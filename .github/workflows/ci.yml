@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Verify Quality Gates, Build C Fastpath, and Run Test Suites
+    runs-on: macos-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Enforce Zero Em Dash Quality Gate
+        run: python3 tools/check_em_dashes.py
+
+      - name: Compile C Fastpath Acceleration Library
+        run: make all
+
+      - name: Run Python Integration and Fuzz Tests
+        run: python3 -m unittest discover -s tst -p "test_*.py"
+
+      - name: Run Benchmarks
+        run: python3 tools/benchmark_runner.py

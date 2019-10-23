@@ -35,6 +35,8 @@ clean:
 	rm -rf $(BIN_DIR) *.o *.so *.dylib $(TST_DIR)/*.log build/ dist/ __pycache__ */__pycache__
 
 bench: all
-	$(PYTHON) $(TOOLS_DIR)/qasm_benchmark.py
+	$(PYTHON) $(TOOLS_DIR)/benchmark_runner.py
 
-.PHONY: all test check-style clean bench
+ci: test bench
+
+.PHONY: all test check-style clean bench ci
