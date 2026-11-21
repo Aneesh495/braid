@@ -22,7 +22,7 @@ jobs:
 
       - name: Install GAP for the CLI and benchmarks
         run: |
-          brew list --versions gap >/dev/null || brew install gap
+          brew list --versions gap >/dev/null || brew install gap-system/gap/gap
           gap --version
 
       - name: Enforce Zero Em Dash Quality Gate
